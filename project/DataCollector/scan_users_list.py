@@ -13,5 +13,5 @@ class ScanUsers:
         # write to the userslist.txt file
         f = open("static_files/userslist.txt", "a")
         for user in users:
-            f.write(user.screen_name + "\\n")
+            f.write(user.screen_name + "\n")
             print(user.screen_name)
