@@ -6,6 +6,5 @@ class Gatherer:
 
     def gather(self):
         statuses = self.api.GetUserTimeline(screen_name="BestFarsi", count=1000)
-        for s in statuses:
-            print(s.created_at)
-            print(s.text)
+        return statuses
+

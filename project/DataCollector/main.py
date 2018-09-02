@@ -1,4 +1,8 @@
-from DataCollector import gather, scan_users_list
+from DataCollector import gather, scan_users_list, clean, save
 
-# gatherer = gather.Gatherer().gather()
-scanner = scan_users_list.ScanUsers().scan()
+# This line of code isn't always executed:
+# scanner = scan_users_list.ScanUsers().scan()
+
+statuses_list = gather.Gatherer().gather()
+cleaned_statuses_list = clean.clean(statuses_list)
+save.write_json(cleaned_statuses_list)
