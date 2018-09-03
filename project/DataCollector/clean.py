@@ -3,6 +3,7 @@ from emoji import UNICODE_EMOJI
 
 
 def clean(statuses):
+    # SAMPLE JSON:
     data = {
         "0": {
             "username": "username",
@@ -19,20 +20,23 @@ def clean(statuses):
     for s in statuses:
         if s.retweeted_status:
             content = s.retweeted_status.full_text
+            user = s.retweeted_status.user.screen_name
         else:
             content = s.full_text
-        content_wo_links = remove_links(content)
+            user = "BestFarsi"
+
+        content_w_line = add_line(content)
+        content_wo_links = remove_links(content_w_line)
         content_wo_emoji = remove_emoji(content_wo_links)
-        username = extract_username(content_wo_emoji)
-        content_wo_emoji = clean_content(content_wo_emoji)
+        content_cleaned = clean_content(content_wo_emoji)
         # content_wo_hashtags = remove_hashtags(content_wo_emoji)
-        content_wo_hashtags = content_wo_emoji
+        content_wo_hashtags = content_cleaned
         hashtags_set = extract_hashtags(content_wo_emoji)
 
         # print("CONTENT: ", content_wo_hashtags)
 
         data[str(index)] = {
-            "username": username,
+            "username": user,
             "date": s.created_at,
             "content": content_wo_hashtags,
             "hashtags": hashtags_set
@@ -85,3 +89,7 @@ def remove_hashtags(content):
 def get_hashtags(text, order=False):
     tags = set([item.strip("#.,-\"\'&*^!") for item in text.split() if (item.startswith("#") and len(item) < 256)])
     return sorted(tags) if order else tags
+
+
+def add_line(content):
+    return content
