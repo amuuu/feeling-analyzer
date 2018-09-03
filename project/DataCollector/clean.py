@@ -23,8 +23,8 @@ def clean(statuses):
             user = s.retweeted_status.user.screen_name
         else:
             content = s.full_text
-            user = "BestFarsi"
-
+            user = s.user.screen_name
+        print("Cleaning: @", user)
         content_w_line = add_line(content)
         content_wo_links = remove_links(content_w_line)
         content_wo_emoji = remove_emoji(content_wo_links)
