@@ -8,28 +8,34 @@ def clean(statuses):
             "username": "username",
             "date": "date",
             "content": "content of the tweet.",
-            # "hashtags": {
-            #     "hashtag1",
-            #     "hashtag2"
-            # }
+            "hashtags": [
+                "hashtag1",
+                "hashtag2"
+            ]
         }
     }
 
     index = 1
     for s in statuses:
-        content_wo_links = remove_links(s.text)
+        if s.retweeted_status:
+            content = s.retweeted_status.full_text
+        else:
+            content = s.full_text
+        content_wo_links = remove_links(content)
         content_wo_emoji = remove_emoji(content_wo_links)
         username = extract_username(content_wo_emoji)
         content_wo_emoji = clean_content(content_wo_emoji)
         # content_wo_hashtags = remove_hashtags(content_wo_emoji)
         content_wo_hashtags = content_wo_emoji
-        # hashtags_set = extract_hashtags(content_wo_emoji)
+        hashtags_set = extract_hashtags(content_wo_emoji)
+
+        # print("CONTENT: ", content_wo_hashtags)
 
         data[str(index)] = {
             "username": username,
             "date": s.created_at,
             "content": content_wo_hashtags,
-            # "hashtags": hashtags_set
+            "hashtags": hashtags_set
         }
         index += 1
 
@@ -45,9 +51,7 @@ def extract_username(content):
 
 
 def clean_content(content):
-    print(content)
     cleaned_content = re.sub('RT @(.*): ', '', content)
-    # print("CONTENT: ", cleaned_content)
     return cleaned_content
 
 
@@ -64,17 +68,18 @@ def remove_links(content):
 
 
 def extract_hashtags(content):
-    hashtags = "\n".join(get_hashtags(content, True))
+    hashtags = "\n".join(get_hashtags(content, True)).split('\n')
     return hashtags
 
 
-# def remove_hashtags(content):
-#     hashtags = "\n".join(get_hashtags(content, True))
-#     content_list = content.split(" ", ".", "،", ".", ",")
-#     for word in content_list:
-#         if word in hashtags:
-#             content_list.replace(word, '')
-#     return hashtags
+def remove_hashtags(content):
+    query = content
+    stopwords = extract_hashtags(content)
+    querywords = query.split()
+    resultwords = [word for word in querywords if word.lower() not in stopwords]
+    wo_hashtags = ' '.join(resultwords)
+
+    return wo_hashtags
 
 
 def get_hashtags(text, order=False):

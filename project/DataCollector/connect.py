@@ -11,5 +11,6 @@ class Connector:
         api = twitter.Api(consumer_key=self.CONSUMER_KEY,
                           consumer_secret=self.CONSUMER_SECRET,
                           access_token_key=self.ACCESS_KEY,
-                          access_token_secret=self.ACCESS_SECRET)
+                          access_token_secret=self.ACCESS_SECRET,
+                          tweet_mode='extended')
         return api

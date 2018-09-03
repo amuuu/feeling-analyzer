@@ -10,6 +10,7 @@ def write_json(data):
                           indent=4, sort_keys=True,
                           separators=(',', ': '), ensure_ascii=False)
         outfile.write(str_)
+    print("Done.")
 
 
 def calculate_current_time():
