@@ -2,10 +2,13 @@ import twitter
 
 
 class Connector:
-    CONSUMER_KEY = "xYxRAO8UgEiykpKhLv3VYs7WP"
-    CONSUMER_SECRET = "zQGFiAk18ICLfWGOFRDF2dSVQi9p3r8e3pxil40RQ9RaeiVZtG"
-    ACCESS_KEY = "951414619645628416-VrEiqUB4XV0TPneaw5TvPKl3d4fbQtg"
-    ACCESS_SECRET = "PZbOIJ9ewRIC8CX43wl7MRfNc81bBofB9RQE7DW0Dcxol"
+    CONSUMER_KEY = ""
+    CONSUMER_SECRET = ""
+    ACCESS_KEY = ""
+    ACCESS_SECRET = ""
+
+    def __init__(self):
+        self.read_credentials()
 
     def create_client(self):
         api = twitter.Api(consumer_key=self.CONSUMER_KEY,
@@ -14,3 +17,21 @@ class Connector:
                           access_token_secret=self.ACCESS_SECRET,
                           tweet_mode='extended')
         return api
+
+    def read_credentials(self):
+        credentials = read_credentials_file()
+        self.CONSUMER_KEY = credentials[0]
+        self.CONSUMER_SECRET = credentials[1]
+        self.ACCESS_KEY = credentials[2]
+        self.ACCESS_SECRET = credentials[3]
+
+
+def read_credentials_file():
+    f = open('../Data/credentials.txt')
+    line = f.readline()
+    credentials = []
+    while line:
+        credentials.append(line.replace('\n', ''))
+        line = f.readline()
+    f.close()
+    return credentials

@@ -1,5 +1,4 @@
 import datetime
-import json
 
 from DataCollector import connect
 
@@ -17,7 +16,7 @@ class ScanUsers:
             f = open("../Data/users/userslist-%s.txt" % date, "w")
             for user in users:
                 f.write(user.screen_name + "\n")
-                print(user.screen_name)
+                # print(user.screen_name)
         else:
             pass
 

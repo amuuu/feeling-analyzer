@@ -15,7 +15,7 @@ class Gatherer:
             self.er_handler.add_to_log(username, 1)
 
     def gather_all(self):
-        username_list = self.read_users_from_file()
+        username_list = read_users_from_file()
         all_statuses = []
         for user in username_list:
             print("Gathering: @%s" % user)
@@ -26,12 +26,13 @@ class Gatherer:
         self.er_handler.write_log_file()
         return all_statuses
 
-    def read_users_from_file(self):
-        f = open('static_files/userslist.txt')
+
+def read_users_from_file():
+    f = open('static_files/userslist.txt')
+    line = f.readline()
+    username_list = []
+    while line:
+        username_list.append(line.replace('\n', ''))
         line = f.readline()
-        username_list = []
-        while line:
-            username_list.append(line.replace('\n', ''))
-            line = f.readline()
-        f.close()
-        return username_list
+    f.close()
+    return username_list
