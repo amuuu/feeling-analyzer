@@ -9,7 +9,7 @@ def clean(statuses):
         "0": {
             "username": "username",
             "date": "date",
-            "tir": "7",
+            "tir": "5",
             "content": "content of the tweet.",
             "hashtags": [
                 "hashtag1",
@@ -36,7 +36,8 @@ def clean(statuses):
         content_wo_hashtags = content_cleaned
         hashtags_set = extract_hashtags(content_wo_emoji)
 
-        tir = tir_calculator.TIRCalculator().calculate_tir(s)
+        tir = tir_calculator.calculate_tir(s)
+        print("\tTIR is %s" % tir)
 
         # print("CONTENT: ", content_wo_hashtags)
 
