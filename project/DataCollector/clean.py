@@ -1,5 +1,6 @@
 import re
 from emoji import UNICODE_EMOJI
+from DataCollector import tir_calculator
 
 
 def clean(statuses):
@@ -8,6 +9,7 @@ def clean(statuses):
         "0": {
             "username": "username",
             "date": "date",
+            "tir": "7",
             "content": "content of the tweet.",
             "hashtags": [
                 "hashtag1",
@@ -24,6 +26,7 @@ def clean(statuses):
         else:
             content = s.full_text
             user = s.user.screen_name
+
         print("Cleaning: @", user)
         content_w_line = add_line(content)
         content_wo_links = remove_links(content_w_line)
@@ -33,13 +36,16 @@ def clean(statuses):
         content_wo_hashtags = content_cleaned
         hashtags_set = extract_hashtags(content_wo_emoji)
 
+        tir = tir_calculator.TIRCalculator().calculate_tir(s)
+
         # print("CONTENT: ", content_wo_hashtags)
 
         data[str(index)] = {
             "username": user,
             "date": s.created_at,
             "content": content_wo_hashtags,
-            "hashtags": hashtags_set
+            "hashtags": hashtags_set,
+            "tir": tir
         }
         index += 1
 

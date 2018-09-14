@@ -1,4 +1,5 @@
-from DataCollector import connect, error_handler
+from DataCollector import connect, error_handler, scan_users_list
+from DataCollector.scan_users_list import get_last_updated_list_file_name
 
 
 class Gatherer:
@@ -28,7 +29,8 @@ class Gatherer:
 
 
 def read_users_from_file():
-    f = open('static_files/userslist.txt')
+    last_update = get_last_updated_list_file_name()
+    f = open('../Data/users/%s' % last_update)
     line = f.readline()
     username_list = []
     while line:

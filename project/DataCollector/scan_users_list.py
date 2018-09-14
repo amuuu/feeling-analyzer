@@ -38,15 +38,12 @@ def update_users_scan_time(current_time):
             if int(last_time_cleaned[1]) < int(current_time_cleaned[1]):
                 # I'm not sure whether i should compare equals or compare if one is bigger than the other.
                 update_user_list_update_log(current_time)
-                print("Can update.")
                 return True
         else:
             update_user_list_update_log(current_time)
-            print("Can update.")
             return True
     else:
         update_user_list_update_log(current_time)
-        print("Can update.")
         return True
     return False
 
