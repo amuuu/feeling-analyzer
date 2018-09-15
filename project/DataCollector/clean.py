@@ -1,6 +1,6 @@
 import re
 from emoji import UNICODE_EMOJI
-from DataCollector import tir_calculator
+from DataCollector import tir_calculator, duplicate_eraser
 
 
 def clean(statuses):
@@ -50,6 +50,7 @@ def clean(statuses):
         }
         index += 1
 
+    data = duplicate_eraser.erase_duplicate(data)
     return data
 
 
