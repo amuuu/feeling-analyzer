@@ -27,7 +27,7 @@ class Connector:
 
 
 def read_credentials_file():
-    f = open('../Data/credentials.txt')
+    f = open('./credentials.txt')
     line = f.readline()
     credentials = []
     while line:

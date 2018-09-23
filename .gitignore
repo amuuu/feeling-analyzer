@@ -2,4 +2,6 @@ project/Data/*
 
 project/.idea/*
 
+project/DataCollector/Gatherer/credentials.txt
+
 project/DataCollector/__pycache__/*

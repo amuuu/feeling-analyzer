@@ -21,9 +21,10 @@ class ScanUsers:
 
 
 def can_scan_users():
-    elastic_users.get_last_update_date()
-    return True
+    print(elastic_users.get_last_update_date())
 
 
 def calculate_current_time():
     return datetime.datetime.now().strftime('%H-%M-%S--%m-%d-%Y')
+
+# can_scan_users()
