@@ -1,6 +1,7 @@
+import datetime
 import re
 from emoji import UNICODE_EMOJI
-from DataCollector import tir_calculator, duplicate_eraser
+from DataCollector.Preprocessor import tir_calculator
 
 
 def clean(statuses):
@@ -46,7 +47,9 @@ def clean(statuses):
             "date": s.created_at,
             "content": content_wo_hashtags,
             "hashtags": hashtags_set,
-            "tir": tir
+            "tir": tir,
+            "timestamp": datetime.datetime.now()
+
         }
         index += 1
 

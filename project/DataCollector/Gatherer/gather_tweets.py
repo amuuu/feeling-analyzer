@@ -1,8 +1,7 @@
-from DataCollector import connect, error_handler, scan_users_list
-from DataCollector.scan_users_list import get_last_updated_list_file_name
+from DataCollector.Gatherer import connect, error_handler
 
 
-class Gatherer:
+class TweetGatherer:
     api = connect.Connector().create_client()
     er_handler = error_handler.ErrorHandler()
 
@@ -28,14 +27,14 @@ class Gatherer:
         return all_statuses
 
 
-def read_users_from_file():
-    last_update = get_last_updated_list_file_name()
-    # f = open('../Data/users/%s' % last_update)
-    f = open('./static_files/userslisttest.txt')
-    line = f.readline()
-    username_list = []
-    while line:
-        username_list.append(line.replace('\n', ''))
-        line = f.readline()
-    f.close()
-    return username_list
+# def read_users_from_file():
+#     last_update = get_last_updated_list_file_name()
+#     f = open('../Data/users/%s' % last_update)
+    # f = open('./static_files/userslisttest.txt')
+    # line = f.readline()
+    # username_list = []
+    # while line:
+    #     username_list.append(line.replace('\n', ''))
+    #     line = f.readline()
+    # f.close()
+    # return username_list
