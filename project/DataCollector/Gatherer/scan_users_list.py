@@ -13,7 +13,7 @@ class ScanUsers:
             users = self.api.GetFriends(screen_name="BestFarsi")
             index = 0
             for user in users:
-                elastic_users.write_users({
+                elastic_users.write_user({
                     str(index): user.screen_name,
                     "timestamp": datetime.datetime.now()
                 }, index)
@@ -21,7 +21,8 @@ class ScanUsers:
 
 
 def can_scan_users():
-    print(elastic_users.get_last_update_date())
+    # print(elastic_users.get_last_update_date())
+    return True
 
 
 def calculate_current_time():

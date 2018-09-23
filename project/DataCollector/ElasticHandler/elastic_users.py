@@ -5,7 +5,7 @@ from elasticsearch import Elasticsearch
 es = Elasticsearch()
 
 
-def write_users(user, index):
+def write_user(user, index):
     res = es.index(index="users_index", doc_type='users_doc', id=index, body=user)
     print("user %s" % user, res['result'])
 
