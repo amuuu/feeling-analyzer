@@ -1,7 +1,7 @@
 import datetime
 import re
 from emoji import UNICODE_EMOJI
-from DataCollector.Preprocessor import tir_calculator
+from DataCollector.Preprocessor import tir_calculator, hasher
 
 
 def clean(statuses):
@@ -40,17 +40,17 @@ def clean(statuses):
         tir = tir_calculator.calculate_tir(s)
         print("\tTIR is %s" % tir)
 
-        # print("CONTENT: ", content_wo_hashtags)
-
         data[str(index)] = {
             "username": user,
             "date": s.created_at,
             "content": content_wo_hashtags,
             "hashtags": hashtags_set,
+            "hash": hasher.hash_tweet(content_wo_hashtags),
             "tir": tir,
-            "timestamp": datetime.datetime.now()
+            "timestamp": datetime.datetime.now(),
 
         }
+
         index += 1
 
     # data = duplicate_eraser.erase_duplicate(data)

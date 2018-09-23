@@ -6,8 +6,6 @@ from DataCollector.ElasticHandler import elastic_users
 # Scan @BestFarsi's following
 scanner = scan_users_list.ScanUsers().scan()
 
-print("@@@@@@@@")
-print(elastic_users.get_last_update_date())
 
 # Get last tweets from the users list
 # all_statuses = gather_tweets.TweetGatherer().gather_all()

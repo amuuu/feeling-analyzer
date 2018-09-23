@@ -25,11 +25,4 @@ def get_last_tweet_date():
 
 
 def get_last_tweet_id():
-    # return es.count(index='tweets_index', doc_type='tweets_doc').get('count')
     return es.count(index='tweets_index', doc_type='tweets_doc')
-    # return es.get()
-
-
-print(get_last_tweet_id())
-# print(get_last_tweet_date().get('_source').get('date'))
-# print(get_last_tweet_date())
