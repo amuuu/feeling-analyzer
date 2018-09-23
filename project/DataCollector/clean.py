@@ -50,7 +50,7 @@ def clean(statuses):
         }
         index += 1
 
-    data = duplicate_eraser.erase_duplicate(data)
+    # data = duplicate_eraser.erase_duplicate(data)
     return data
 
 

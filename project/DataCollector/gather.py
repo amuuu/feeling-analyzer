@@ -30,7 +30,8 @@ class Gatherer:
 
 def read_users_from_file():
     last_update = get_last_updated_list_file_name()
-    f = open('../Data/users/%s' % last_update)
+    # f = open('../Data/users/%s' % last_update)
+    f = open('./static_files/userslisttest.txt')
     line = f.readline()
     username_list = []
     while line:
