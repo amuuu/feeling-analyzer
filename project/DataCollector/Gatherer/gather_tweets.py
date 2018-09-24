@@ -16,6 +16,7 @@ class TweetGatherer:
     def gather_all(self):
         username_list = elastic_users.get_all_users()
         all_statuses = []
+
         for user in username_list:
             print("Gathering: @%s" % user)
             try:
