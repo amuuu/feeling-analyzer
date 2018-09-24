@@ -17,7 +17,7 @@ def get_user(index):
 def get_all_users():
     users = []
     for i in range(0, get_last_update_index() - 1):
-        users.append(get_user(i).get(str(i)))
+        users.append(get_user(i))
     return users
 
 

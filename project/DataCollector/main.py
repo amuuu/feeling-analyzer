@@ -1,7 +1,7 @@
 from DataCollector.Gatherer import gather_tweets, scan_users_list
 
 
-scan_users_list.ScanUsers().scan()
+# scan_users_list.ScanUsers().scan()
 
 gather_tweets.TweetGatherer().gather_all()
 

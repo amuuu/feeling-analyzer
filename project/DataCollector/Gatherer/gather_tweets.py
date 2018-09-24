@@ -1,5 +1,7 @@
+import math
+
 from DataCollector.Gatherer import connect, error_handler
-from DataCollector.ElasticHandler import elastic_users, batch_writer
+from DataCollector.ElasticHandler import elastic_users, batch_writer, elastic_tweets
 
 
 class TweetGatherer:
@@ -15,6 +17,7 @@ class TweetGatherer:
 
     def gather_all(self):
         username_list = elastic_users.get_all_users()
+        last_index = int(elastic_tweets.get_last_tweet_id())
         all_statuses = []
         user_count = 1
         for user in username_list:
@@ -24,8 +27,9 @@ class TweetGatherer:
             except TypeError:
                 print("ERROR ON ADDING THIS USER'S TWEETS TO WHOLE LIST: @%s" % user)
 
-            if user_count % 200 == 0:
-                batch_writer.write_batch(all_statuses)
+            if (user_count % 200 == 0) or user_count > (math.floor(user_count/200)+1):
+                batch_writer.write_batch(all_statuses, user_count+last_index)
                 all_statuses = []
+
             user_count += 1
         return "Collecting Job DONE!"
