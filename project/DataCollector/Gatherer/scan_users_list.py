@@ -13,6 +13,7 @@ class ScanUsers:
             users = self.api.GetFriends(screen_name="BestFarsi")
             index = 0
             for user in users:
+                print("User %s was added to users list." % user.screen_name)
                 elastic_users.write_user({
                     str(index): user.screen_name,
                     "timestamp": datetime.datetime.now()

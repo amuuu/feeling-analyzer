@@ -5,11 +5,10 @@ from elasticsearch import Elasticsearch
 es = Elasticsearch()
 
 
-def write_tweets(tweets):
-    index = 0
+def write_tweets(tweets, start_index):
     for tweet in tweets:
-        res = es.index(index="tweets_index", doc_type='tweets_doc', id=index, body=tweets.get(str(index)))
-        index += 1
+        res = es.index(index="tweets_index", doc_type='tweets_doc', id=start_index, body=tweets.get(str(start_index)))
+        start_index += 1
         print(res['result'])
 
 
