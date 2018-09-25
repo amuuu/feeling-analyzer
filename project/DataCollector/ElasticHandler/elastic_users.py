@@ -21,7 +21,7 @@ def get_all_users():
 
 def get_last_update_date():
     last_index = get_last_update_index()
-    return es.get(index='users_index', doc_type='users_doc', id=last_index - 1).get('timestamp')
+    return es.get(index='users_index', doc_type='users_doc', id=last_index - 1).get('_source').get('timestamp')
 
 
 def get_last_update_index():

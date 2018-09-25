@@ -8,7 +8,7 @@ class ScanUsers:
     api = connect.Connector().create_client()
 
     def scan(self):
-        if can_scan_users():
+        if not can_scan_users():
             # get the list of users
             users = self.api.GetFriends(screen_name="BestFarsi")
             print("Getting users from API...")
@@ -23,5 +23,10 @@ class ScanUsers:
 
 
 def can_scan_users():
-    # print(elastic_users.get_last_update_date())
+    print(elastic_users.get_last_update_date())
     return True
+
+
+def split_time(time):
+    hour = time[11]+time[12]
+    return hour
