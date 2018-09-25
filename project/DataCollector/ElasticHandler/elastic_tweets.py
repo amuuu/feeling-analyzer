@@ -23,4 +23,5 @@ def get_last_tweet_date():
 
 
 def get_last_tweet_id():
+    print("COUNT: ", es.count(index='tweets_index', doc_type='tweets_doc'))
     return es.count(index='tweets_index', doc_type='tweets_doc').get('count')

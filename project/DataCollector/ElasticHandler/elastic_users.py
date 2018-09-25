@@ -18,6 +18,7 @@ def get_all_users():
     users = []
     for i in range(get_last_update_index() - 1, -1, -1):
         if last_update_day == get_user_adding_day(i):
+            print("USER %s ADDED." % get_user(i))
             users.append(get_user(i))
     return users
 
@@ -29,7 +30,7 @@ def get_last_update_date():
 
 def get_user_adding_day(index):
     time = es.get(index='users_index', doc_type='users_doc', id=index).get('_source').get('timestamp')
-    return time[8] + time[9]
+    return int(time[8] + time[9])
 
 
 def get_last_update_index():

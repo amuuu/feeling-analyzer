@@ -30,7 +30,7 @@ def can_scan_users():
         last_update_day = get_last_day_updated()
         rnow_day = now_day()
         if last_update_day == rnow_day:
-            print("ERROR: Users list was already scanned today.")
+            print("CAUTION: Users list was already scanned today.")
             return False
         else:
             return True
