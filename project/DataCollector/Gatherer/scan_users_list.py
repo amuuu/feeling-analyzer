@@ -23,13 +23,15 @@ class ScanUsers:
 
 
 def can_scan_users():
-    last_update_day = get_day(elastic_users.get_last_update_date())
-    rnow_day = now_day()
-    if last_update_day == rnow_day:
-        print("# ERROR: Can't update users checking list")
-        return False
+    if elastic_users.get_last_update_index() != 0:
+        last_update_day = get_day(elastic_users.get_last_update_date())
+        rnow_day = now_day()
+        if last_update_day == rnow_day:
+            print("ERROR: Users list was already scanned today.")
+            return False
+        else:
+            return True
     else:
-        print("# Can update users checking list!")
         return True
 
 

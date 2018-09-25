@@ -45,3 +45,5 @@ def run_from_terminal(args):
 
 
 run_from_terminal(sys.argv)
+
+# clean_users()
