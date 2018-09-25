@@ -8,7 +8,7 @@ class ScanUsers:
     api = connect.Connector().create_client()
 
     def scan(self):
-        if not can_scan_users():
+        if can_scan_users():
             # get the list of users
             users = self.api.GetFriends(screen_name="BestFarsi")
             print("Getting users from API...")
@@ -23,10 +23,20 @@ class ScanUsers:
 
 
 def can_scan_users():
-    print(elastic_users.get_last_update_date())
-    return True
+    last_update_day = get_day(elastic_users.get_last_update_date())
+    rnow_day = now_day()
+    if last_update_day == rnow_day:
+        print("# ERROR: Can't update users checking list")
+        return False
+    else:
+        print("# Can update users checking list!")
+        return True
 
 
-def split_time(time):
-    hour = time[11]+time[12]
-    return hour
+def get_day(time):
+    day = time[8] + time[9]
+    return int(day)
+
+
+def now_day():
+    return int(datetime.datetime.now().day)
