@@ -32,7 +32,7 @@ def run_from_terminal(args):
         print("Created index %s successfully." % args[2])
     elif args[1] == "clean_indice":
         clean_indice(args[2].split('index=', ''),
-                     args[3].split('doc_type', ''))
+                     args[3].split('doc_type=', ''))
         print("Indice %s cleaned successfully." % args[2])
     elif args[1] == "clean_tweets":
         clean_tweets()
