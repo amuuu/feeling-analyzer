@@ -1,4 +1,3 @@
-from DataCollector.Gatherer import gather_tweets
 from DataCollector.ElasticHandler import elastic_tweets
 from DataCollector.Preprocessor import clean
 
