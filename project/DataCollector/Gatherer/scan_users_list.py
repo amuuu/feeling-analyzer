@@ -11,8 +11,8 @@ class ScanUsers:
         if can_scan_users():
             # get the list of users
             users = self.api.GetFriends(screen_name="BestFarsi")
-            index = 0
             print("Getting users from API...")
+            index = 0
             for user in users:
                 print("User %s was added to users list." % user.screen_name)
                 elastic_users.write_user({

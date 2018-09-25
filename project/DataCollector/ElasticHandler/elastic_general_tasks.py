@@ -10,6 +10,7 @@ def clean_indice(index, doc_type):
     es.delete_by_query(index=index, doc_type=doc_type, body={"query": {"match_all": {}}})
 
 
+
 def clean_tweets():
     clean_indice('tweets_index', 'tweets_doc')
     print('Tweets index cleaned successfully.')
@@ -20,4 +21,6 @@ def clean_users():
     print('Users index cleaned successfully.')
 
 
-clean_users()
+def create_index(name):
+    es.indices.create(index=name, ignore=400)
+    print('Index %s created successfully.' % name)
