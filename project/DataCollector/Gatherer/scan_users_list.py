@@ -21,10 +21,13 @@ class ScanUsers:
                 }, index)
                 index += 1
 
+    def get_last_scanned(self):
+        pass
+
 
 def can_scan_users():
     if elastic_users.get_last_update_index() != 0:
-        last_update_day = get_day(elastic_users.get_last_update_date())
+        last_update_day = get_last_day_updated()
         rnow_day = now_day()
         if last_update_day == rnow_day:
             print("ERROR: Users list was already scanned today.")
@@ -35,7 +38,8 @@ def can_scan_users():
         return True
 
 
-def get_day(time):
+def get_last_day_updated():
+    time = elastic_users.get_last_update_date()
     day = time[8] + time[9]
     return int(day)
 
