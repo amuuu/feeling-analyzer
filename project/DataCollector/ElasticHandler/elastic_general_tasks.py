@@ -13,12 +13,12 @@ def clean_indice(index, doc_type):
 
 def clean_tweets():
     clean_indice('tweets_index', 'tweets_doc')
-    print('Tweets index cleaned successfully.')
+    # print('Tweets index cleaned successfully.')
 
 
 def clean_users():
     clean_indice('users_index', 'users_doc')
-    print('Users index cleaned successfully.')
+    # print('Users index cleaned successfully.')
 
 
 def create_index(name):
