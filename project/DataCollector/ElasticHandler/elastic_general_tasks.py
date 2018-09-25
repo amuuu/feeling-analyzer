@@ -40,4 +40,6 @@ def run_from_terminal(args):
         print("INVALID COMMAND.")
 
 
-run_from_terminal(sys.argv)
+# run_from_terminal(sys.argv)
+
+clean_tweets()

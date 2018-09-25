@@ -50,7 +50,7 @@ def clean(statuses):
             "timestamp": datetime.datetime.now(),
 
         }
-
+        print("data[%s] added ok" % str(index))
         index += 1
 
     # data = duplicate_eraser.erase_duplicate(data)

@@ -22,14 +22,14 @@ class TweetGatherer:
         all_statuses = []
         user_count = 1
         for user in username_list:
-            print("Gathering: @%s" % user)
+            print("ID: %s" % str(user_count - 1), "Gathering: @%s" % user.get('_source').get(str(user_count - 1)))
             try:
                 all_statuses.extend(self.gather(user, 100))
             except TypeError:
                 print("ERROR ON ADDING THIS USER'S TWEETS TO WHOLE LIST: @%s" % user)
 
             # I'M NOT QUITE SURE ABOUT THE SECOND CONDITION OF IF YET.
-            if (user_count % 200 == 0) or (user_count > (math.floor(len(username_list) / 200) * 200)):
+            if (user_count % 10 == 0) or (user_count > math.floor(len(username_list) / 10) * 10):
                 batch_writer.write_batch(all_statuses, user_count + last_index)
                 all_statuses = []
 
