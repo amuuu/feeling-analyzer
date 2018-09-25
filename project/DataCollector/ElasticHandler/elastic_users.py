@@ -14,12 +14,15 @@ def get_user(index):
 
 
 def get_all_users():
+
     last_update_day = get_last_update_day()
     users = []
-    for i in range(get_last_update_index() - 1, -1, -1):
+    # for i in range(get_last_update_index() - 1, -1, -1):
+    for i in range(0, get_last_update_index() - 1):
         if last_update_day == get_user_adding_day(i):
-            print("USER %s ADDED." % get_user(i))
+            # print("USER %s ADDED." % get_user(i).get('_source').get(str(i)))
             users.append(get_user(i))
+    print("Getting users from elastic done.")
     return users
 
 

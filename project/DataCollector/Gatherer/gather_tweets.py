@@ -17,8 +17,8 @@ class TweetGatherer:
 
     def gather_all(self):
         username_list = elastic_users.get_all_users()
-        # last_index = int(elastic_tweets.get_last_tweet_id())
-        last_index=10
+        last_index = int(elastic_tweets.get_last_tweet_id())
+        # last_index = -1
         all_statuses = []
         user_count = 1
         for user in username_list:
