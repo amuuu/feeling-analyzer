@@ -27,8 +27,9 @@ class TweetGatherer:
             except TypeError:
                 print("ERROR ON ADDING THIS USER'S TWEETS TO WHOLE LIST: @%s" % user)
 
-            if (user_count % 200 == 0) or user_count > (math.floor(user_count/200)+1):
-                batch_writer.write_batch(all_statuses, user_count+last_index)
+            # I'M NOT QUITE SURE ABOUT THE SECOND CONDITION OF IF YET.
+            if (user_count % 200 == 0) or (user_count > (math.floor(len(username_list) / 200) * 200)):
+                batch_writer.write_batch(all_statuses, user_count + last_index)
                 all_statuses = []
 
             user_count += 1
