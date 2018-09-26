@@ -1,11 +1,16 @@
 import math
 
 from DataCollector.Gatherer import connect, error_handler
-from DataCollector.ElasticHandler import elastic_users, batch_writer, elastic_tweets
+from DataCollector.ElasticHandler import elastic_users, batch_writer, elastic_tweets, batch_settings
 
 
 class TweetGatherer:
     api = connect.Connector().create_client()
+    batch_options = batch_settings.BatchSettings()
+
+    def __init__(self):
+        self.batch_options.read_settings_file()
+        print("Batch size", self.batch_options.batch_size)
 
     def gather(self, username, count):
         try:
@@ -28,7 +33,8 @@ class TweetGatherer:
                 print("ERROR ON ADDING THIS USER'S TWEETS TO WHOLE LIST: @%s" % user)
 
             # I'M NOT QUITE SURE ABOUT THE SECOND CONDITION OF IF YET.
-            if (user_count % 200 == 0) or (user_count > math.floor(len(username_list) / 200) * 200):
+            if (user_count % self.batch_options.batch_size == 0) or \
+                    (user_count > math.floor(len(username_list) / self.batch_options.batch_size) * self.batch_options.batch_size):
                 batch_writer.write_batch(all_statuses)
                 all_statuses = []
 
