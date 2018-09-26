@@ -10,7 +10,7 @@ class TweetGatherer:
 
     def __init__(self):
         self.batch_options.read_settings_file()
-        print("Batch size", self.batch_options.batch_size)
+        print("Batch size =", self.batch_options.batch_size)
 
     def gather(self, username, count):
         try:
