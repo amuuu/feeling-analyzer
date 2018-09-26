@@ -26,7 +26,7 @@ class TweetGatherer:
         user_count = 1
         for user in username_list:
             username = user.get('_source').get(str(user.get('_id')))
-            print("ID: %s" % str(user_count - 1), "Gathering: @%s" % user.get('_source').get(str(user_count - 1)))
+            print("Gathering: @%s" % user.get('_source').get(str(user_count - 1)), " with ID %s." % str(user_count - 1))
             try:
                 all_statuses.extend(self.gather(username, 100))
             except TypeError:
