@@ -7,7 +7,7 @@ def write_tweets(tweets, start_index):
     index = 0
     for tweet in tweets:
 
-        res = es.index(index="tweets_index", doc_type='tweets_doc', id=start_index, body=tweets.get(str(index)))
+        res = es.index(index="tweets_index", doc_type='tweets_doc', id=start_index+index, body=tweets.get(str(index)))
         index += 1
         print(res['result'])
 
@@ -25,3 +25,5 @@ def get_last_tweet_date():
 
 def get_last_tweet_id():
     return es.count(index='tweets_index', doc_type='tweets_doc').get('count')
+
+

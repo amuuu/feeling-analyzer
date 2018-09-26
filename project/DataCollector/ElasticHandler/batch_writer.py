@@ -2,6 +2,8 @@ from DataCollector.ElasticHandler import elastic_tweets
 from DataCollector.Preprocessor import clean
 
 
-def write_batch(tweet_dict, batch_last_index):
+def write_batch(tweet_dict):
     cleaned_statuses_list = clean.clean(tweet_dict)
-    elastic_tweets.write_tweets(cleaned_statuses_list, batch_last_index)
+    print("SIZE: ", len(tweet_dict))
+    last_batch_index = elastic_tweets.get_last_tweet_id()
+    elastic_tweets.write_tweets(cleaned_statuses_list, last_batch_index)

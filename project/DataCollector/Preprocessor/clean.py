@@ -5,19 +5,7 @@ from DataCollector.Preprocessor import tir_calculator, hasher
 
 
 def clean(statuses):
-    # SAMPLE JSON:
-    data = {
-        "0": {
-            "username": "username",
-            "date": "date",
-            "tir": "5",
-            "content": "content of the tweet.",
-            "hashtags": [
-                "hashtag1",
-                "hashtag2"
-            ]
-        }
-    }
+    data = {}
 
     index = 1
     for s in statuses:
@@ -38,7 +26,7 @@ def clean(statuses):
         hashtags_set = extract_hashtags(content_wo_emoji)
 
         tir = tir_calculator.calculate_tir(s)
-        print("\tTIR is %s" % tir)
+        print("TIR is %s" % tir)
 
         data[str(index)] = {
             "username": user,
@@ -50,7 +38,7 @@ def clean(statuses):
             "timestamp": datetime.datetime.now(),
 
         }
-        print("data[%s] added ok" % str(index))
+        print("Data[%s] added ok" % str(index))
         index += 1
 
     # data = duplicate_eraser.erase_duplicate(data)
