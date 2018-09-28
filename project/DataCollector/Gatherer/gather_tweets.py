@@ -34,10 +34,12 @@ class TweetGatherer:
                     all_statuses.extend(user_statuses)
             except TypeError:
                 print("ERROR ON ADDING THIS USER'S TWEETS TO WHOLE LIST: @%s" % user)
+                all_statuses.extend({"error": "didn't receive completely"})
 
             # I'M NOT QUITE SURE ABOUT THE SECOND CONDITION OF IF YET.
             if (user_count % self.batch_options.batch_size == 0) or \
-                    (user_count > math.floor(len(username_list) / self.batch_options.batch_size) * self.batch_options.batch_size):
+                    (user_count > math.floor(len(username_list) / self.batch_options.batch_size)
+                     * self.batch_options.batch_size):
                 batch_writer.write_batch(all_statuses)
                 all_statuses = []
 
