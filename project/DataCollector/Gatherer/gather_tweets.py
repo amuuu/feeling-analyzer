@@ -19,6 +19,7 @@ class TweetGatherer:
         except Exception:
             print("ERROR RECEIVING TWEETS FROM @%s" % username)
             error_handler.report_error(username, 1)
+            return "ERROR"
 
     def gather_all(self):
         username_list = elastic_users.get_all_users()
@@ -28,7 +29,9 @@ class TweetGatherer:
             username = user.get('_source').get(str(user.get('_id')))
             print("Gathering: @%s" % user.get('_source').get(str(user_count - 1)), " with ID %s." % str(user_count - 1))
             try:
-                all_statuses.extend(self.gather(username, 100))
+                user_statuses = self.gather(username, 100)
+                if user_statuses != 'ERROR':
+                    all_statuses.extend(user_statuses)
             except TypeError:
                 print("ERROR ON ADDING THIS USER'S TWEETS TO WHOLE LIST: @%s" % user)
 
