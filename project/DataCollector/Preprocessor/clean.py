@@ -16,7 +16,7 @@ def clean(statuses):
             content = s.full_text
             user = s.user.screen_name
 
-        print("Cleaning: @", user)
+        # print("Cleaning: @", user)
         content_w_line = add_line(content)
         content_wo_links = remove_links(content_w_line)
         content_wo_emoji = remove_emoji(content_wo_links)
@@ -26,7 +26,7 @@ def clean(statuses):
         hashtags_set = extract_hashtags(content_wo_emoji)
 
         tir = tir_calculator.calculate_tir(s)
-        print("TIR is %s" % tir)
+        # print("TIR is %s" % tir)
 
         data[str(index)] = {
             "username": user,
@@ -38,7 +38,7 @@ def clean(statuses):
             "timestamp": datetime.datetime.now(),
 
         }
-        print("Data[%s] added ok" % str(index))
+        # print("Data[%s] added ok" % str(index))
         index += 1
 
     # data = duplicate_eraser.erase_duplicate(data)

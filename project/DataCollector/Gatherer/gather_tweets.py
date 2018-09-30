@@ -24,6 +24,7 @@ class TweetGatherer:
     def gather_all(self):
         username_list = elastic_users.get_all_users()
         all_statuses = []
+        last_batch = []
         user_count = 1
         for user in username_list:
             username = user.get('_source').get(str(user.get('_id')))
@@ -37,11 +38,15 @@ class TweetGatherer:
                 all_statuses.extend({"error": "didn't receive completely"})
 
             # I'M NOT QUITE SURE ABOUT THE SECOND CONDITION OF IF YET.
-            if (user_count % self.batch_options.batch_size == 0) or \
-                    (user_count > math.floor(len(username_list) / self.batch_options.batch_size)
-                     * self.batch_options.batch_size):
+            if user_count % self.batch_options.batch_size == 0:
                 batch_writer.write_batch(all_statuses)
                 all_statuses = []
-
+            elif user_count > math.floor(
+                    len(username_list) / self.batch_options.batch_size) * self.batch_options.batch_size:
+                last_batch.extend(all_statuses)
             user_count += 1
+
+        if len(last_batch) != 0:
+            batch_writer.write_batch(last_batch)
+
         return "Collecting Job DONE!"
