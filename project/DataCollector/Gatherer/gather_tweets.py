@@ -49,4 +49,5 @@ class TweetGatherer:
         if len(last_batch) != 0:
             batch_writer.write_batch(last_batch)
 
-        return "Collecting Job DONE!"
+        print("Collecting Job DONE!")
+        return True
