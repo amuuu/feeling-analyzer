@@ -1,4 +1,9 @@
 # Feeling Analyzer
+
+**THIS PROJECT GOT ABANDONED IN 2018, I just wanted to share the code until before its cancelation. Maybe it helps somebody.**
+
+
+
 This project is a system that scans the content shared by Iranian users in different social networks and analyzes the overall rate of satisfaction of life and happiness of people in Iran, finds out the reasons of those feelings, and shows them in well-detailed charts. Feeling analyzer gets updated in every hour.
 
 ## How does it work?
